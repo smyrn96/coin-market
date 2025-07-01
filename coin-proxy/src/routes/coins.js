@@ -7,31 +7,31 @@ router.get("/", async (req, res) => {
   try {
     const data = await fetchMarketData(req.query);
 
-    if (!Array.isArray(data) || data.length === 0) {
+    if (!Array.isArray(data.coinData) || data.coinData.length === 0) {
       return res.status(404).json({ error: "No market data found" });
     }
 
     console.log("Fetching all the market data", data);
 
-    res.json(
-      data.map(
-        ({
-          name,
-          symbol,
-          current_price,
-          high_24h,
-          low_24h,
-          price_change_24h,
-        }) => ({
-          name,
-          symbol,
-          current_price,
-          high_24h,
-          low_24h,
-          price_change_24h,
-        })
-      )
+    const coinData = data.coinData.map(
+      ({
+        name,
+        symbol,
+        current_price,
+        high_24h,
+        low_24h,
+        price_change_24h,
+      }) => ({
+        name,
+        symbol,
+        current_price,
+        high_24h,
+        low_24h,
+        price_change_24h,
+      })
     );
+
+    res.json({ data: coinData, pagination: data.pagination });
   } catch (err) {
     console.error("CoinGecko API error:", err.message);
     res.status(500).json({ error: "Failed to fetch CoinGecko data" });
