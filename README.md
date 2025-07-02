@@ -1,6 +1,6 @@
 # 🪙 Full-Stack Crypto Price Tracker
 
-A lightweight full-stack application built for the **Cyberscope Assignment** that displays cryptocurrency market data using the [CoinGecko API](https://www.coingecko.com/en/api). The app consists of:
+A lightweight full-stack application that displays cryptocurrency market data using the [CoinGecko API](https://www.coingecko.com/en/api). The app consists of:
 
 - **List Page**: View paginated market data of various cryptocurrencies.
 - **Details Page**: View detailed information for a selected coin.
