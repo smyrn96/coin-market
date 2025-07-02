@@ -12,3 +12,11 @@ export const fetchCoins = async ({ vs_currency = "usd", page, per_page }) => {
 
   return response.data;
 };
+
+export const getCoinDetails = async (id, query = { vs_currency: "usd" }) => {
+  const response = await axiosInstance.get(`/coins/${id}`, {
+    params: query,
+  });
+
+  return response.data;
+};

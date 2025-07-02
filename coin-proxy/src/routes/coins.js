@@ -15,6 +15,7 @@ router.get("/", async (req, res) => {
 
     const coinData = data.coinData.map(
       ({
+        id,
         name,
         symbol,
         current_price,
@@ -22,6 +23,7 @@ router.get("/", async (req, res) => {
         low_24h,
         price_change_24h,
       }) => ({
+        id,
         name,
         symbol,
         current_price,
@@ -49,10 +51,9 @@ router.get("/:id", async (req, res) => {
 
     const currency = defaultQuery.vs_currency;
 
+    const { name, description, symbol, market_data } = data;
+
     const {
-      name,
-      description,
-      market_data,
       price_change_percentage_24h,
       price_change_percentage_7d,
       price_change_percentage_14d,
@@ -60,8 +61,7 @@ router.get("/:id", async (req, res) => {
       price_change_percentage_60d,
       price_change_percentage_200d,
       price_change_percentage_1y,
-    } = data;
-
+    } = market_data;
     const current_price_coin = market_data.current_price[currency];
     const highest_24h = market_data.high_24h[currency];
     const lowest_24h = market_data.low_24h[currency];
@@ -69,6 +69,7 @@ router.get("/:id", async (req, res) => {
     res.json({
       name,
       description,
+      symbol,
       current_price_coin,
       price_change_percentage_24h,
       price_change_percentage_7d,
